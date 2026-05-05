@@ -49,7 +49,7 @@ def test_magic_eight_ball():
 #------------------------#
 # Fortune cookie section #
 #------------------------#
-def fortune_cookie(print_answer=False):
+def fortune_cookie(print_answer=True):
     # A tuple of 10 fortunes to pull from (generated with Gemma4)
     fortunes_tuple = (  "You will encounter an unexpected delight today. Keep your mind open and enjoy the surprise.",
                         "Patience is a profound asset. What you are waiting for is worth the wait.",
@@ -77,15 +77,17 @@ def fortune_cookie(print_answer=False):
 
 
 def test_fortune_cookie():
-    # Run fortune_cookie function 5 times with the argument True so the function handles printing the fortune
-    print("Run fortune_cookie(True) 5 times allowing the function to handle printing the fortune:\n")
+    # By running the function with the argument True, we are telling the function 
+    # to print the output and we don't have to print or format it ourselves.
+    print("Run fortune_cookie function 5 times with 'True' argument and let the function print the raw output:\n")
     for n in range(5):
         fortune_cookie(True)
 
-    # Run fortune_cookie function 5 times with no arguments. Handle printing the fortune ourselves.
-    print("\n\nRun fortune_cookie() function 5 times with no arguments and format the output:\n")
+    # Run fortune_cookie function 5 times with "False" argument telling the function to not print the output. 
+    # We handle printing the fortune ourselves.
+    print("\n\nRun fortune_cookie function 5 times with 'False' argument and format the output ourselves:\n")
     for n in range(5):
-        fortune, numbers = fortune_cookie()
+        fortune, numbers = fortune_cookie(False)
         print(f"You crack open the fortune cookie and see a rolled up piece of paper inside.\n"
               f"You carefully unroll it and see that there is text on it.\n"
               f"It says: \"{fortune}\"\n"
@@ -93,14 +95,51 @@ def test_fortune_cookie():
               f"You wonder what all of this means...\n")
 
 
+#-------------------#
+# Fizz Buzz section #
+#-------------------#
+def fizz_buzz(print_answer=True):
+    # We could just print the output, but we're gonna save it to a list for more modularity
+    output = []
+    for n in range(1,101):
+        # Here we append a new item to the list every time we increment our loop
+        output.append(n)
 
+        # We check if n is divisible by 3 without a remainder
+        # If it does, we replace the list item associated
+        # with our place in the loop with 'Fizz'
+        if n % 3 == 0:
+            output[n-1] = 'Fizz'
+        
+        # Check if n is divisible by 5 without a remainder
+        if n % 5 == 0:
+            # Check if the list item associated with the place
+            # in the loop has already been changed to 'Fizz'
+            # (which would only be possible if it passed the check for division by 3)
+            if output[n-1] == 'Fizz':
+                # Add 'Buzz' to the output list item (which should already be 'Fizz')
+                output[n-1] = output[n-1] + 'Buzz'
+            else:
+                # If the item does not match 'Fizz' (not divisible by 3)
+                # Instead of adding to, we replace the value with 'Buzz'
+                output[n-1] = 'Buzz'
+        # Check if the function was called with a print_answer=True argument
+        # and if it is, print the current list item in the loop                
+        if print_answer:
+            print(output[n-1])
+    
+    # Return the full list so the user can choose to format the output different 
+    # or do anything else with the output
+    return output
 
 #--------------------------#
 # Main loop of the program #
 #--------------------------#
 def main():
     #test_magic_eight_ball()
-    test_fortune_cookie()
+    #test_fortune_cookie()
+    fizz_buzz()
+    pass
 
 
 
