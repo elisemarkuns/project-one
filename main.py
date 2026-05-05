@@ -132,14 +132,75 @@ def fizz_buzz(print_answer=True):
     # or do anything else with the output
     return output
 
+
+#--------------------------#
+# Program selection screen #
+#--------------------------#
+class Menu():
+    
+    def __init__(self):
+        self.exit = False
+        self.show_menu()
+
+    def receive_user_input(self):
+        user_input = input()
+        return user_input
+
+    def show_menu(self):
+        # Menu header section
+        print(  f"________________________________________\n"
+                f"___________Python Project One___________\n"
+                f"__________________by____________________\n"
+                f"_____________Elise_Markuns______________\n"
+                f"________________________________________\n")
+        print(  f"1. Magic Eight Ball\n"
+                f"2. Fortune Cookie generator\n"
+                f"3. Print Fizz Buzz\n"
+                f"\n"
+                f"Type a number (1-3) to select which program to run: ")
+        
+        while not self.exit:
+            selection = self.receive_user_input()
+            match selection:
+                case "1":
+                    self.show_magic_eight_ball()
+                case "2":
+                    self.show_fortune_cookie()
+                case "3":
+                    self.show_fizz_buzz()
+                case "q":
+                    self.exit = True
+                case _:
+                    print("Input has to be a number 1-3 (1 or 2 or 3) or \"q\" to quit.")
+            
+        self.exit_program()
+                    
+    def exit_program(self):
+        print("Thank you for checking this project out. Now exiting...")
+        exit()         
+        
+    def show_magic_eight_ball(self):
+        print("Magic Eight Ball")
+
+    def show_fortune_cookie(self):
+        print("Fortune Cookie")
+
+    def show_fizz_buzz(self):
+        print("Fizz Buzz")
+
+        
+
+
+
+
 #--------------------------#
 # Main loop of the program #
 #--------------------------#
 def main():
     #test_magic_eight_ball()
     #test_fortune_cookie()
-    fizz_buzz()
-    pass
+    #fizz_buzz()
+    menu = Menu()
 
 
 
