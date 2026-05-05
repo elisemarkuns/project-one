@@ -6,10 +6,14 @@ import random
 
 # Function containing the logic for magic eight ball
 def magic_eight_ball(question=None,print_answer=True):
-    answers_tuple = ((("It is certain."),("It is decidedly so."),("Without a doubt."),("Yes, definitely."),("You may rely on it.")),  # Positive answers 1 (5x)
-                   (("As I see it, yes."),("Most likely."),("Outlook good."),("Yes"),("Signs point to yes.")),  # Positive answers 2 (5x)
-                   (("Reply hazy, try again."),("Ask again later."),("Better not tell you now."),("Cannot predict now."),("Concentrate and ask again.")),   # Non-committal answers (5)
-                   (("Don't count on it."),("My reply is no."),("My sources say no."),("Outlook not so good."),("Very doubtful")))   # Negative answers (5)
+                    # Positive answers 1 (5x)
+    answers_tuple = ((("It is certain."),("It is decidedly so."),("Without a doubt."),("Yes, definitely."),("You may rely on it.")),
+                    # Positive answers 2 (5x)
+                   (("As I see it, yes."),("Most likely."),("Outlook good."),("Yes"),("Signs point to yes.")),
+                    # Non-committal answers (5x)
+                   (("Reply hazy, try again."),("Ask again later."),("Better not tell you now."),("Cannot predict now."),("Concentrate and ask again.")),
+                    # Negative answers (5x)
+                   (("Don't count on it."),("My reply is no."),("My sources say no."),("Outlook not so good."),("Very doubtful")))
 
     if not question:
         question = input("What is your question for magic eight-ball? ")
@@ -43,7 +47,7 @@ def test_magic_eight_ball():
 
 
 #------------------------#
-#-Fortune cookie section-#
+# Fortune cookie section #
 #------------------------#
 def fortune_cookie(print_answer=False):
     # A tuple of 10 fortunes to pull from (generated with Gemma4)
@@ -62,15 +66,31 @@ def fortune_cookie(print_answer=False):
     random.seed()
     
     # Generate a random fortune
-    fortune = f"{fortunes_tuple[random.range(0,9)]}\n{random.range(1,99)} {random.range(1,99)} {random.range(1,99)} {random.range(1,99)}"
-    
+    fortune = f"{fortunes_tuple[random.randint(0,9)]}"
+    numbers = f"{random.randint(1,99)} {random.randint(1,99)} {random.randint(1,99)} {random.randint(1,99)}"
     # Check if function call passed a True argument
     # if yes, print the fortune, otherwise skip
     if print_answer:
-        print(fortune)
+        print(f"{fortune}\n{numbers}")
 
-    return fortune
+    return fortune, numbers
 
+
+def test_fortune_cookie():
+    # Run fortune_cookie function 5 times with the argument True so the function handles printing the fortune
+    print("Run fortune_cookie(True) 5 times allowing the function to handle printing the fortune:\n")
+    for n in range(5):
+        fortune_cookie(True)
+
+    # Run fortune_cookie function 5 times with no arguments. Handle printing the fortune ourselves.
+    print("\n\nRun fortune_cookie() function 5 times with no arguments and format the output:\n")
+    for n in range(5):
+        fortune, numbers = fortune_cookie()
+        print(f"You crack open the fortune cookie and see a rolled up piece of paper inside.\n"
+              f"You carefully unroll it and see that there is text on it.\n"
+              f"It says: \"{fortune}\"\n"
+              f"You notice there are numbers beneath the text: {numbers}\n"
+              f"You wonder what all of this means...\n")
 
 
 
@@ -80,7 +100,7 @@ def fortune_cookie(print_answer=False):
 #--------------------------#
 def main():
     #test_magic_eight_ball()
-
+    test_fortune_cookie()
 
 
 
